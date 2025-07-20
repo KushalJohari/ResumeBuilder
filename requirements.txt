@@ -5,4 +5,4 @@ langchain-groq
 streamlit
 python-docx
 weasyprint
-pyscopg2
+psycopg2-binary
