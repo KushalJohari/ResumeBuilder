@@ -33,7 +33,6 @@ phone = st.text_input("PhoneNo")
 summary = st.text_area("Professional Summary")
 
 
-
 with st.expander("AIsummary", expanded=True):
     job_title = st.text_input("JobTitle")
     if st.button("Summary using AI") and job_title:
