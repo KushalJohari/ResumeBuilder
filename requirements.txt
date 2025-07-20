@@ -1,12 +1,8 @@
-fastapi
-uvicorn
 langchain
 pydantic
-langchain-ollama
 langchain-community
 langchain-groq
 streamlit
-beautifulsoup4
 python-docx
 weasyprint
 pyscopg2
