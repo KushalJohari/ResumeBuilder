@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+langchain
+pydantic
+langchain-ollama
+langchain-community
+streamlit
+beautifulsoup4
+python-docx
+weasyprint
