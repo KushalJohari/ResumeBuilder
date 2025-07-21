@@ -82,7 +82,7 @@ for i, edu in enumerate(st.session_state.education):
     with st.expander(f"Education {i + 1}", expanded=True):
         st.session_state.education[i]["Course"] = st.text_input(f"Course", value=edu["Course"], key=f"Course{i}")
         st.session_state.education[i]["College"] = st.text_input(f"College", value=edu["College"], key=f"College_{i}")
-        st.session_state.education[i]["Graduation Year"] = f"Year of Graduation: {st.selectbox('Year', GradYears)}"
+        st.session_state.education[i]["Graduation Year"] = f"Year of Graduation: {st.selectbox('Year', GradYears, key=f'year_{i}')}"
 
 st.sidebar.title("ChatWithAI")
 chat_prompt = PromptTemplate(
