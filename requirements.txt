@@ -6,3 +6,4 @@ streamlit
 python-docx
 weasyprint
 psycopg2-binary
+pdfplumber

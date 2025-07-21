@@ -1,3 +1,6 @@
+import pdfplumber
+from docx import Document
+
 def resume_template(name, email, phone, summary, skills, experience, education, projects):
     skills_list = ''.join(f"<li>{skills.strip()}</li>" for skills in skills.split(','))
 
@@ -79,3 +82,50 @@ def resume_template(name, email, phone, summary, skills, experience, education, 
     </html>
     """
     return html
+
+def resume_ats_template(name, email, phone, summary, skills, experience, education, projects):
+    skills_list = ', '.join([s.strip() for s in skills.split(',')])
+
+    project_text = ""
+    for project in projects:
+        project_text += f"- {project['title']}: {project['summary']}\n"
+
+    experience_text = ""
+    for exp in experience:
+        experience_text += f"- {exp['Job Role']} at {exp['Company']} ({exp['Time']})\n"
+
+    education_text = ""
+    for edu in education:
+        education_text += f"- {edu['Course']} at {edu['College']} ({edu['Graduation Year']})\n"
+
+    text = f"""
+            Name: {name}
+            Email: {email}
+            Phone: {phone}
+
+            Professional Summary:
+            {summary}
+
+            Skills:
+            {skills_list}
+
+            Experience:
+            {experience_text}
+
+            Projects:
+            {project_text}
+
+            Education:
+            {education_text}
+            """
+    return text.strip()
+
+def extract_text_from_resume(file):
+    if file.name.endswith(".pdf"):
+        with pdfplumber.open(file) as pdf:
+            return "\n".join(page.extract_text() for page in pdf.pages if page.extract_text())
+    elif file.name.endswith(".docx"):
+        doc = Document(file)
+        return "\n".join(para.text for para in doc.paragraphs)
+    else:
+        return ""
