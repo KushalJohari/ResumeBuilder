@@ -57,7 +57,9 @@ for i, exp in enumerate(st.session_state.experience):
         end_month = st.selectbox("End Month", months, key=f"end_month_{i}")
         year = st.selectbox("Year", Years, key=f"year_{i}")
         st.session_state.experience[i]["Time"] = f"{start_month} - {end_month} ({year})"
-
+        if st.button(f"Delete Experience {i + 1}", key=f"delete_exp_{i}"):
+            st.session_state.experience.pop()
+            st.rerun()
 
 #Projects
 if 'projects' not in st.session_state:
@@ -70,6 +72,9 @@ for i, proj in enumerate(st.session_state.projects):
     with st.expander(f"Project {i + 1}", expanded=True):
         st.session_state.projects[i]["title"] = st.text_input(f"Project Title {i+1}", value=proj["title"], key=f"title_{i}")
         st.session_state.projects[i]["summary"] = st.text_area(f"Project Summary {i+1}", value=proj["summary"], key=f"summary_{i}")
+        if st.button(f"Delete Experience {i + 1}", key=f"delete_exp_{i}"):
+            st.session_state.experience.pop()
+            st.rerun()
 
 #Education
 if 'education' not in st.session_state:
@@ -83,6 +88,9 @@ for i, edu in enumerate(st.session_state.education):
         st.session_state.education[i]["Course"] = st.text_input(f"Course", value=edu["Course"], key=f"Course{i}")
         st.session_state.education[i]["College"] = st.text_input(f"College", value=edu["College"], key=f"College_{i}")
         st.session_state.education[i]["Graduation Year"] = f"Year of Graduation: {st.selectbox('Year', GradYears, key=f'year_{i}')}"
+        if st.button(f"Delete Experience {i + 1}", key=f"delete_exp_{i}"):
+            st.session_state.experience.pop()
+            st.rerun()
 
 st.sidebar.title("ChatWithAI")
 chat_prompt = PromptTemplate(
