@@ -41,86 +41,97 @@ st.title("Resume Builder")
 st.markdown("""
 <style>
 
-/* Global App Background */
+/* 🌑 Dark App Background */
 .stApp {
-    background-color: #856D4D; 
+    background-color: #1F1F1F;
+    color: #F1F1F1;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* Text Inputs + Text Areas */
-input, textarea {
-    background-color: #fff8e1 !important;
-    color: black !important;
-    border: 1px solid #ffc107 !important;
+/* 🌐 Main Title (st.title) */
+h1 {
+    color: #F1F1F1 !important;
+    font-weight: 700 !important;
+}
+
+/* 🧭 Sidebar background and padding fix */
+section[data-testid="stSidebar"] {
+    background-color: #121212 !important;
+    padding: 18px;
+}
+
+/* ✍️ Sidebar Label Styling */
+section[data-testid="stSidebar"] label {
+    color: #F1F1F1 !important;
+    font-weight: 600 !important;
+}
+
+/* 🎛 Sidebar input fields */
+section[data-testid="stSidebar"] input {
+    background-color: #2B2B2B !important;
+    color: #F1F1F1 !important;
+    border: 1px solid #444 !important;
     border-radius: 6px !important;
     padding: 8px !important;
-    box-shadow: 1px 2px 6px rgba(0,0,0,0.1);
-}
-            
-/* Selectbox */
-div[data-baseweb="select"] > div {
-    background-color: #fff3cd !important;
-    border-radius: 6px !important;
-    border: 1px solid #ffeb3b !important;
 }
 
-/* Expander Panel */
+/* 🧾 All labels in the main area */
+div[data-testid="stTextInput"] label,
+div[data-testid="stTextArea"] label,
+div[data-testid="stSelectbox"] label {
+    color: #F1F1F1 !important;
+    font-weight: 600 !important;
+}
+
+/* ✏️ Input fields styling */
+input, textarea {
+    background-color: #2B2B2B !important;
+    color: #F1F1F1 !important;
+    border: 1px solid #444 !important;
+    border-radius: 6px !important;
+}
+
+/* 📦 Selectbox styling */
+div[data-baseweb="select"] > div {
+    background-color: #2B2B2B !important;
+    color: #F1F1F1 !important;
+    border: 1px solid #444 !important;
+}
+
+/* 🧩 Expander Panel */
 details {
-    background-color: #blue;
-    border: 1px solid #c5e1a5;
+    background-color: #2B2B2B;
+    border: 1px solid #444;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
-
-/* Expander label text color */
 details summary {
-    color: white !important;   /* Your desired color */
-    font-weight: 600 !important;
-    font-size: 17px !important;
-} 
-
-summary {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-    color: #33691e;
+    color: #F1F1F1;
 }
 
-/* Button */
-.stButton>button {
-    background-color: #00000000;
+/* 🔘 Buttons */
+.stButton>button, .stDownloadButton>button {
+    background-color: #0A66C2;
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    border-radius: 6px;
     font-weight: 600;
+    border: none;
+    padding: 10px 20px;
+    box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
     transition: 0.3s;
 }
-
-.stButton>button:hover {
-    background-color: #1565c0;
-    transform: scale(1.02);
-}
-
-/* Download Button */
-.stDownloadButton>button {
-    background-color:  #00000000;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 1px 2px 8px rgba(0,0,0,0.2);
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.stDownloadButton>button:hover {
-    background-color: #1565c0;
+.stButton>button:hover, .stDownloadButton>button:hover {
+    background-color: #0955A2;
     transform: scale(1.03);
 }
-            
+
 </style>
 """, unsafe_allow_html=True)
+
+
+
 
 name = st.text_input("Full Name")
 email = st.text_input("Email")
@@ -187,7 +198,7 @@ for i, edu in enumerate(st.session_state.education):
             st.session_state.education.pop()
             st.rerun()
 
-st.sidebar.title("ChatWithAI")
+st.sidebar.title("Promptfolio")
 
 chat_prompt = PromptTemplate(
     input_variables=["user_input"],
@@ -198,13 +209,6 @@ chat_prompt = PromptTemplate(
             "I'm only trained to answer resume-related questions. I can't help with that."
             """
             )
-st.markdown("""
-    <style>
-    [data-testid="stSidebar"] {
-        background-color: #3D2B1F;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 another_chain = chat_prompt | model
 
