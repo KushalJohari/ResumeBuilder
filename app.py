@@ -53,7 +53,11 @@ for i, exp in enumerate(st.session_state.experience):
     with st.expander(f"Experience {i + 1}", expanded=True):
         st.session_state.experience[i]["Job Role"] = st.text_input(f"Job Role", value=exp["Job Role"], key=f"Job Role_{i}")
         st.session_state.experience[i]["Company"] = st.text_input(f"Company", value=exp["Company"], key=f"Company_{i}")
-        st.session_state.experience[i]["Time"] = st.selectbox('Start Month',months,key=f"start_month_{i}") - st.selectbox('End Month', months, key=f"end_month_{i}"), st.selectbox('Year', Years, key=f"year_{i}")
+        start_month = st.selectbox("Start Month", months, key=f"start_month_{i}")
+        end_month = st.selectbox("End Month", months, key=f"end_month_{i}")
+        year = st.selectbox("Year", Years, key=f"year_{i}")
+        st.session_state.experience[i]["Time"] = f"{start_month} - {end_month} ({year})"
+
 
 #Projects
 if 'projects' not in st.session_state:
