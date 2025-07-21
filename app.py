@@ -72,8 +72,8 @@ for i, proj in enumerate(st.session_state.projects):
     with st.expander(f"Project {i + 1}", expanded=True):
         st.session_state.projects[i]["title"] = st.text_input(f"Project Title {i+1}", value=proj["title"], key=f"title_{i}")
         st.session_state.projects[i]["summary"] = st.text_area(f"Project Summary {i+1}", value=proj["summary"], key=f"summary_{i}")
-        if st.button(f"Delete Experience {i + 1}", key=f"delete_exp_{i}"):
-            st.session_state.experience.pop()
+        if st.button(f"Delete Project {i + 1}", key=f"delete_proj_{i}"):
+            st.session_state.projects.pop()
             st.rerun()
 
 #Education
@@ -88,8 +88,8 @@ for i, edu in enumerate(st.session_state.education):
         st.session_state.education[i]["Course"] = st.text_input(f"Course", value=edu["Course"], key=f"Course{i}")
         st.session_state.education[i]["College"] = st.text_input(f"College", value=edu["College"], key=f"College_{i}")
         st.session_state.education[i]["Graduation Year"] = f"Year of Graduation: {st.selectbox('Year', GradYears, key=f'year_{i}')}"
-        if st.button(f"Delete Experience {i + 1}", key=f"delete_exp_{i}"):
-            st.session_state.experience.pop()
+        if st.button(f"Delete Education {i + 1}", key=f"delete_edu_{i}"):
+            st.session_state.education.pop()
             st.rerun()
 
 st.sidebar.title("ChatWithAI")
